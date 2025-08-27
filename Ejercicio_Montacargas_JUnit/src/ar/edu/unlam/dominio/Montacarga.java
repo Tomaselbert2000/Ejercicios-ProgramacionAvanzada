@@ -1,6 +1,7 @@
 package ar.edu.unlam.dominio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Montacarga {
 	
@@ -8,10 +9,12 @@ public class Montacarga {
 	
 	// creamos un atributo de tipo ArrayList
 	private ArrayList<Carga> cargas; // tenemos un tipificador para indicar que esta lista es de cargas
+	private HashSet<Carga> cargasSinDuplicados;
 	
 	public Montacarga(Double pesoMaximoPermitido) {
 		this.pesoMaximoPermitido = pesoMaximoPermitido;
 		this.cargas = new ArrayList<Carga>();
+		this.cargasSinDuplicados = new HashSet<Carga>();
 	}
 
 	public Double getPeso() {
@@ -36,5 +39,11 @@ public class Montacarga {
 	
 	public void vaciar() {
 		this.cargas.clear();
+	}
+	
+	// aca creamos un metodo que agrega una carga la cual NO PUEDE SER DUPLICADA
+	public boolean agregarCarga(Carga carga) {
+		boolean cargaAgregada = this.cargasSinDuplicados.add(carga);
+		return cargaAgregada;
 	}
 }
