@@ -1,0 +1,19 @@
+Nos contratan para desarrollar un software que permita gestionar una inmobiliaria.
+Las inmobiliarias se encargan de la comercialización de Propiedades. Las propiedades se pueden clasificar en Casas, Departamentos, PH, Terrenos, Campos.
+
+La Venta es una operación donde una Propiedad es vendida, es decir pasa de un Propietario A a su nuevo Propietario B.
+
+Se solicita desarrollar un software en Java, con un menú de opciones que permita realizar lo siguiente:
+    1. Agregar nuevas propiedades (Las propiedades se pueden repetir, porque distintos vendedores pueden cargar 
+    	una misma propiedad con diferentes valores de venta por ejemplo)
+    2.  Modificar propiedades existentes (La búsqueda de propiedad se realiza por código)
+    3. Agregar clientes (Son aquellos que se encuentran en búsqueda de una propiedad. No se puede agregar dos clientes con un mismo DNI)
+    4. Buscar propiedades por diferentes parámetros:
+        a. Rango de precios
+        b. Ubicación (Ciudad)
+    5. Realizar la venta de una propiedad
+
+Se puede utilizar:
+    • JUnit
+    • GIT
+    • Contenedores (List, Set, Map o similar)
