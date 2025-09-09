@@ -1,0 +1,5 @@
+Una empresa de peajes registra cada paso de vehiculos, lo que resulta en una coleccion con multiples entradas
+duplicadas (un vehiculo puede pasar varias veces). Es necesario poder registrar la pasada de un vehiculo
+(vehiculo y fecha con hora), obtener un listado con todas las pasadas realizadas (todos los vehiculos)
+y obtener un listado de vehiculos (solo vehiculos) sin duplicados.
+Para identificar a cada vehiculo debemos usar la pantente
