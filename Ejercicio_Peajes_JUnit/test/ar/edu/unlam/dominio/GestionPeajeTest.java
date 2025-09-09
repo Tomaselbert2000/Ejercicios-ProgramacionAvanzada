@@ -84,4 +84,42 @@ public class GestionPeajeTest {
 		assertEquals(sizeEsperado, sizeObtenido);
 	}
 	
+	@Test
+	public void dadoQueExisteUnPeajeEntoncesExisteUnArrayDeTarifasNoNulo() {
+		assertNotNull(this.gestionPeaje.getListaTarifas());
+	}
+	
+	@Test
+	public void dadoQueExisteUnPeajeYUnaListaDeTarifasSiAgregoUnaTarifaObtengo1() {
+		Tarifa tarifa1 = new Tarifa(1, 0);
+		this.gestionPeaje.registrarNuevaTarifa(tarifa1);
+		Integer cantidadTarifasEsperada = 1;
+		Integer cantidadTarifasObtenida = this.gestionPeaje.getCantidadTarifasRegistradas();
+		assertEquals(cantidadTarifasEsperada, cantidadTarifasObtenida);
+	}
+	
+	@Test
+	public void dadoQueExisteUnaTarifaConUnIdObtengo1() {
+		Tarifa tarifa1 = new Tarifa(1, 0);
+		Integer codigoTarifaEsperado = 1;
+		Integer codigoTarifaObtenido = tarifa1.getId();
+		assertEquals(codigoTarifaEsperado, codigoTarifaObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnaTarifaConUnValorObtengo1000() {
+		Tarifa tarifa1 = new Tarifa(1, 1000.0);
+		Double precioEsperado = 1000.0;
+		Double precioObtenido = tarifa1.getValor();
+		assertEquals(precioEsperado, precioObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnPeajeSiGuardoDosTarifasIgualesLa2daNoSeGuarda() {
+		Tarifa tarifa1 = new Tarifa(1, 1000.0);
+		Boolean fueAgregada = this.gestionPeaje.registrarNuevaTarifa(tarifa1);
+		Boolean fueAgregadaDeNuevo = this.gestionPeaje.registrarNuevaTarifa(tarifa1);
+		assertTrue(fueAgregada); // aca vemos que si da true la primera vez
+		assertFalse(fueAgregadaDeNuevo); // y verificamos que a partir de la 2da vez ya devuelve false
+	}
 }

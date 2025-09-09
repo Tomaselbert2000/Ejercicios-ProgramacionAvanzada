@@ -7,10 +7,12 @@ public class GestionPeaje {
 
 	private HashSet<Vehiculo> listaDeVehiculosRegistrados;
 	private ArrayList<Pase> listaDeRegistrosDePasadas;
+	private HashSet<Tarifa> listaDeTarifas;
 	
 	public GestionPeaje() {
 		this.listaDeVehiculosRegistrados = new HashSet<>();
 		this.listaDeRegistrosDePasadas = new ArrayList<>();
+		this.listaDeTarifas = new HashSet<>();
 	}
 
 	public HashSet<Vehiculo> obtenerListaDeVehiculosRegistrados() {
@@ -53,5 +55,20 @@ public class GestionPeaje {
 			}
 		}
 		return registrosFiltradosPorPatente;
+	}
+
+	public HashSet<Tarifa> getListaTarifas() {
+		return this.listaDeTarifas;
+	}
+
+	public Boolean registrarNuevaTarifa(Tarifa tarifa) {
+		if(this.listaDeTarifas.add(tarifa)) {
+			return true;
+		}
+		return false;
+	}
+
+	public Integer getCantidadTarifasRegistradas() {
+		return this.listaDeTarifas.size();
 	}
 }
