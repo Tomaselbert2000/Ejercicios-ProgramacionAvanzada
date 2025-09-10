@@ -9,9 +9,11 @@ public class GestorPeaje {
 	// aca usamos una coleccion de tipo hashset para que NO permita duplicados
 	// los arraylists si permiten duplicados por lo tanto no sirven en este caso
 	private HashSet<Pase> listaPases;
+	private HashSet<Tarifa> listaDeTarifas;
 	
 	public GestorPeaje() {
 		this.listaPases = new HashSet<>();
+		this.listaDeTarifas = new HashSet<>();
 	}
 	
 	public Boolean registrarPase(Pase pase) {	
@@ -46,5 +48,21 @@ public class GestorPeaje {
 			}
 		}
 		return listaPasesPorFecha;
+	}
+
+	public Boolean registrarTarifa(Tarifa nuevaTarifa) {
+		if(this.listaDeTarifas.add(nuevaTarifa)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Tarifa obtenerTarifaVigente() {
+		for(Tarifa t : this.listaDeTarifas) {
+			if(t.getFechaHasta() == null) {
+				return t;
+			}
+		}
+		return null;
 	}
 }

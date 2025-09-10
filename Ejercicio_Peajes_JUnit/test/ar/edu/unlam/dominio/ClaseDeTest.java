@@ -137,7 +137,7 @@ public class ClaseDeTest {
 		// instanciamos vehiculos
 		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos");
 		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend");
-		Vehiculo vehiculo3 = new Vehiculo("GHI", "Peugeout", "208");
+		Vehiculo vehiculo3 = new Vehiculo("GHI789", "Peugeout", "208");
 		
 		// creamos una fecha en comun
 		LocalDateTime fechaYhora = LocalDateTime.of(2025, 9, 10, 12, 30);
@@ -158,5 +158,21 @@ public class ClaseDeTest {
 		
 		assertNotNull(listaDePasesPorFechaYhora); // verificamos que no sea null el objeto
 		assertEquals(cantidadPasesEsperada, cantidadPasesObtenida); // y ademas verificamos si el size del array corresponde
+	}
+	
+	@Test
+	public void dadoQueExisteUnTelepaseSinTarifasSiCreoUnaTarifaObtengoTrue(){
+		GestorPeaje telepase = new GestorPeaje();
+		Tarifa tarifa = new Tarifa(1, null, null);
+		Boolean tarifaAgregadaEsperada = telepase.registrarTarifa(tarifa);
+		assertTrue(tarifaAgregadaEsperada);
+	}
+	
+	@Test
+	public void dadoQueExisteLaTarifaDeJulioTodosLosPasesDeEseMesValen1000() {
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 0, 0));
+		
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Pase paseJulio = new Pase(null, null)
 	}
 }
