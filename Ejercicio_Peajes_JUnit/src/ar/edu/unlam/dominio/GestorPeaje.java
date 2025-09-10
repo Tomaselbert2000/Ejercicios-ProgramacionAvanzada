@@ -58,7 +58,23 @@ public class GestorPeaje {
 		}
 		return false;
 	}
-	
+
+	public Double obtenerValorDeTarifaDePase(Pase pase) {
+		for (Tarifa t : this.listaDeTarifas) {
+			if(pase.getFechaYhora().isAfter(t.getFechaDesde()) && pase.getFechaYhora().isBefore(t.getFechaHasta())) {
+					return t.getValor();
+				}
+			}
+		return 0.0;
+	}
+
+	public Boolean registrarTipoVehiculo(TipoVehiculo tipo) {
+		if(this.listaDeTiposVehiculos.add(tipo)) {
+			return true;
+		}
+		return false;
+	}
+
 	public Tarifa obtenerTarifaVigente() {
 		for(Tarifa t : this.listaDeTarifas) {
 			if(t.getFechaHasta() == null) {
@@ -68,19 +84,7 @@ public class GestorPeaje {
 		return null;
 	}
 
-	public Double obtenerValorDeTarifaDePase(Pase pase) {
-		for (Tarifa t : this.listaDeTarifas) {
-			if(pase.getFechaYhora().isAfter(t.getFechaDesde()) && pase.getFechaYhora().isBefore(t.getFechaHasta())) {
-					return t.getValor();
-				}
-			}
-		return null;
-	}
-
-	public Boolean registrarTipoVehiculo(TipoVehiculo tipo) {
-		if(this.listaDeTiposVehiculos.add(tipo)) {
-			return true;
-		}
-		return false;
+	public Double obtenerValorTarifaVigente() {
+		return this.obtenerTarifaVigente().getValor();
 	}
 }

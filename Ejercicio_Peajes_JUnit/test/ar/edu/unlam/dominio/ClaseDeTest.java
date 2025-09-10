@@ -21,7 +21,7 @@ public class ClaseDeTest {
 		String marca = "Fiat";
 		String modelo = "Cronos";
 		
-		Vehiculo vehiculo = new Vehiculo(patente, marca, modelo);
+		Vehiculo vehiculo = new Vehiculo(patente, marca, modelo, null);
 		LocalDateTime fechaYhora = LocalDateTime.of(2025,9,10,12,5);
 		Pase pase = new Pase(vehiculo , fechaYhora);
 		Boolean paseAgregado = telepase.registrarPase(pase); // si el metodo registra el pase deberia retornar true
@@ -34,7 +34,7 @@ public class ClaseDeTest {
 		String patente = "DEF456";
 		String marca = "Volkswagen";
 		String modelo = "Gol Trend";
-		Vehiculo vehiculo = new Vehiculo(patente, marca, modelo);
+		Vehiculo vehiculo = new Vehiculo(patente, marca, modelo, null);
 		LocalDateTime fechaYhora = LocalDateTime.of(2025,9,10,12,5);
 		Pase pase = new Pase(vehiculo, fechaYhora);
 		// vemos que pasa si intentamos guardar el mismo pase dos veces
@@ -65,7 +65,7 @@ public class ClaseDeTest {
 	public void dadoQueExisteUnTelepaseYunVehiculoSiPasaDosVecesEnDosHorariosDiferentesObtengoTrue() {
 		GestorPeaje telepase = new GestorPeaje();
 		
-		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", null);
 		
 		Pase pase1 = new Pase(vehiculo, LocalDateTime.of(2025, 9, 10, 14, 30));
 		Pase pase2 = new Pase(vehiculo, LocalDateTime.of(2025, 9,10, 19, 20));
@@ -83,7 +83,7 @@ public class ClaseDeTest {
 	public void dadoQueExisteUnPeajeObtengoUnaColeccionDeVehiculos() {
 		GestorPeaje telepase = new GestorPeaje();
 		
-		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", null);
 		
 		// hacemos que el vehiculo pase en 3 ocasiones
 		Pase pase1 = new Pase(vehiculo, LocalDateTime.of(2025, 8, 6, 15, 30));
@@ -111,8 +111,8 @@ public class ClaseDeTest {
 		GestorPeaje telepase = new GestorPeaje();
 		
 		// creamos dos vehiculos con diferentes patentes
-		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos");
-		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend");
+		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos", null);
+		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend", null);
 		
 		// creamos dos pasadas para el primer vehiculo
 		Pase pase1 = new Pase(vehiculo1, LocalDateTime.of(2025, 9, 10, 16, 52));
@@ -136,9 +136,9 @@ public class ClaseDeTest {
 		GestorPeaje  telepase = new GestorPeaje();
 		
 		// instanciamos vehiculos
-		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos");
-		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend");
-		Vehiculo vehiculo3 = new Vehiculo("GHI789", "Peugeout", "208");
+		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos", null);
+		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend", null);
+		Vehiculo vehiculo3 = new Vehiculo("GHI789", "Peugeout", "208", null);
 		
 		// creamos una fecha en comun
 		LocalDateTime fechaYhora = LocalDateTime.of(2025, 9, 10, 12, 30);
@@ -172,7 +172,7 @@ public class ClaseDeTest {
 	@Test
 	public void dadoQueExisteLaTarifaDeJulioTodosLosPasesDeEseMesValen1000() {
 		GestorPeaje telepase = new GestorPeaje();
-		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", null);
 		
 		// creamos la tarifa y el pase, luego cargamos en el telepase
 		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 0, 0), 1000.0);
@@ -197,7 +197,7 @@ public class ClaseDeTest {
 		telepase.registrarTarifa(agosto);
 		
 		// ahora creamos dos pases diferentes y tambien los cargamos, ademas de un vehiculo
-		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", null);
 		Pase pasadaEnAgosto = new Pase(vehiculo, LocalDateTime.of(2025, 8, 19, 12, 30));
 		
 		// registramos los pases
@@ -212,7 +212,7 @@ public class ClaseDeTest {
 	@Test
 	public void dadoQueExisteUnPeajeConDosTarifasDeJulioYAgostoObtengoValoresDiferentes() {
 		GestorPeaje telepase = new GestorPeaje();
-		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", null);
 		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
 		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
 		Pase pasadaEnJulio = new Pase(vehiculo, LocalDateTime.of(2025, 7, 19, 12, 30));
@@ -253,5 +253,31 @@ public class ClaseDeTest {
 		String tipoDeVehiculoEsperado = "Auto";
 		String tipoDeVehiculoObtenido = tipo1.getDescripcion();
 		assertEquals(tipoDeVehiculoEsperado, tipoDeVehiculoObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnVehiculoYUnaCategoriaDeVehiculoObtengoLaDescripcionDeSutipo() {
+		GestorPeaje telepase = new GestorPeaje();
+		// creamos la categoria del vehiculo y la cargamos en el telepase
+		TipoVehiculo tipoAuto = new TipoVehiculo(1, "Auto");
+		telepase.registrarTipoVehiculo(tipoAuto);
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", tipoAuto);
+		String tipoEsperado = "Auto";
+		String tipoObtenido = vehiculo.getTipo().getDescripcion();
+		assertEquals(tipoEsperado, tipoObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnPeajeSiTieneUnaTarifaSinFechaDeFinEntoncesEsLaTarifaVigente() {
+		GestorPeaje telepase = new GestorPeaje();
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025, 7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		Tarifa septiembre = new Tarifa(3, LocalDateTime.of(2025, 9, 1, 0, 0), null, 1200.0);
+		telepase.registrarTarifa(julio);
+		telepase.registrarTarifa(agosto);
+		telepase.registrarTarifa(septiembre);
+		Double valorTarifaVigenteEsperado = 1200.0;
+		Double valorTarifaVigenteObtenido = telepase.obtenerValorTarifaVigente();
+		assertEquals(valorTarifaVigenteEsperado, valorTarifaVigenteObtenido);
 	}
 }

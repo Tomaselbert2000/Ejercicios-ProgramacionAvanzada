@@ -7,11 +7,13 @@ public class Vehiculo {
 	private String patente;
 	private String marca;
 	private String modelo;
+	private TipoVehiculo tipoVehiculo;
 
-	public Vehiculo(String patente, String marca, String modelo) {
+	public Vehiculo(String patente, String marca, String modelo, TipoVehiculo tipoVehiculo) {
 		this.patente = patente;
 		this.marca = marca;
 		this.modelo = modelo;
+		this.tipoVehiculo = tipoVehiculo;
 	}
 
 	public String getPatente() {
@@ -55,5 +57,9 @@ public class Vehiculo {
 		Vehiculo other = (Vehiculo) obj;
 		return Objects.equals(marca, other.marca) && Objects.equals(modelo, other.modelo)
 				&& Objects.equals(patente, other.patente);
+	}
+
+	public TipoVehiculo getTipo() {
+		return this.tipoVehiculo;
 	}
 }
