@@ -2,6 +2,7 @@ package ar.edu.unlam.dominio;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
@@ -163,16 +164,94 @@ public class ClaseDeTest {
 	@Test
 	public void dadoQueExisteUnTelepaseSinTarifasSiCreoUnaTarifaObtengoTrue(){
 		GestorPeaje telepase = new GestorPeaje();
-		Tarifa tarifa = new Tarifa(1, null, null);
+		Tarifa tarifa = new Tarifa(1, null, null, 0.0);
 		Boolean tarifaAgregadaEsperada = telepase.registrarTarifa(tarifa);
 		assertTrue(tarifaAgregadaEsperada);
 	}
 	
 	@Test
 	public void dadoQueExisteLaTarifaDeJulioTodosLosPasesDeEseMesValen1000() {
-		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 0, 0));
-		
+		GestorPeaje telepase = new GestorPeaje();
 		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
-		Pase paseJulio = new Pase(null, null)
+		
+		// creamos la tarifa y el pase, luego cargamos en el telepase
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 0, 0), 1000.0);
+		Pase paseJulio = new Pase(vehiculo, LocalDateTime.of(2025, 7, 11, 12,30));
+		telepase.registrarTarifa(julio);
+		telepase.registrarPase(paseJulio);
+		
+		// ahora evaluamos si realmente toma el valor de 1000
+		Double valorPaseJulioEsperado = 1000.0;
+		Double valorPaseJulioObtenido = telepase.obtenerValorDeTarifaDePase(paseJulio);
+		
+		// y ahora evaluamos si funciona
+		assertEquals(valorPaseJulioEsperado, valorPaseJulioObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteLaTarifaDeAgostoTodosLosPasesDeEseMesValen1100() {
+		GestorPeaje telepase = new GestorPeaje();
+		
+		// creamos dos tarifas diferentes y las cargamos
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		telepase.registrarTarifa(agosto);
+		
+		// ahora creamos dos pases diferentes y tambien los cargamos, ademas de un vehiculo
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Pase pasadaEnAgosto = new Pase(vehiculo, LocalDateTime.of(2025, 8, 19, 12, 30));
+		
+		// registramos los pases
+		telepase.registrarPase(pasadaEnAgosto);
+		
+		// y ahora validamos si valen lo mismo o no
+		Double valorPaseAgostoEsperado = 1100.0;
+		Double valorPaseAgostoObtenido = telepase.obtenerValorDeTarifaDePase(pasadaEnAgosto);
+		assertEquals(valorPaseAgostoEsperado, valorPaseAgostoObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnPeajeConDosTarifasDeJulioYAgostoObtengoValoresDiferentes() {
+		GestorPeaje telepase = new GestorPeaje();
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos");
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025,  7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		Pase pasadaEnJulio = new Pase(vehiculo, LocalDateTime.of(2025, 7, 19, 12, 30));
+		Pase pasadaEnAgosto = new Pase(vehiculo, LocalDateTime.of(2025, 8, 19, 12, 30));
+		
+		// cargamos todos los datos
+		
+		telepase.registrarTarifa(julio);
+		telepase.registrarTarifa(agosto);
+		telepase.registrarPase(pasadaEnJulio);
+		telepase.registrarPase(pasadaEnAgosto);
+		
+		Double valorDeJulioObtenido = telepase.obtenerValorDeTarifaDePase(pasadaEnJulio); // esto tiene que devolver 1000
+		Double valorDeAgostoObtenido = telepase.obtenerValorDeTarifaDePase(pasadaEnAgosto); // y esto tiene que devolver 1100
+		
+		assertNotEquals(valorDeJulioObtenido, valorDeAgostoObtenido); // y aca validamos que efectivamente son distintos
+	}
+	
+	@Test
+	public void dadoQueExisteUnPeajeSiRegistroUnTipoDeVehiculoObtengoTrue() {
+		GestorPeaje telepase = new GestorPeaje();
+		TipoVehiculo tipo1 = new TipoVehiculo(1, null);
+		Boolean seAgrego = telepase.registrarTipoVehiculo(tipo1);
+		assertTrue(seAgrego);
+	}
+	
+	@Test
+	public void dadoQueExisteUnTipoDeVehiculoObtengoQueSuIdEs1() {
+		TipoVehiculo tipo1 = new TipoVehiculo(1, "Auto");
+		Integer idEsperado = 1;
+		Integer idObtenido = tipo1.getId();
+		assertEquals(idEsperado, idObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnTipoDeVehiculoSiPreguntoSuDescripcionObtengoAuto() {
+		TipoVehiculo tipo1 = new TipoVehiculo(1, "Auto");
+		String tipoDeVehiculoEsperado = "Auto";
+		String tipoDeVehiculoObtenido = tipo1.getDescripcion();
+		assertEquals(tipoDeVehiculoEsperado, tipoDeVehiculoObtenido);
 	}
 }

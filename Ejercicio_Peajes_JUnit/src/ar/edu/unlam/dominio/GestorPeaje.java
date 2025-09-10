@@ -10,10 +10,12 @@ public class GestorPeaje {
 	// los arraylists si permiten duplicados por lo tanto no sirven en este caso
 	private HashSet<Pase> listaPases;
 	private HashSet<Tarifa> listaDeTarifas;
+	private HashSet<TipoVehiculo> listaDeTiposVehiculos;
 	
 	public GestorPeaje() {
 		this.listaPases = new HashSet<>();
 		this.listaDeTarifas = new HashSet<>();
+		this.listaDeTiposVehiculos = new HashSet<>();
 	}
 	
 	public Boolean registrarPase(Pase pase) {	
@@ -64,5 +66,21 @@ public class GestorPeaje {
 			}
 		}
 		return null;
+	}
+
+	public Double obtenerValorDeTarifaDePase(Pase pase) {
+		for (Tarifa t : this.listaDeTarifas) {
+			if(pase.getFechaYhora().isAfter(t.getFechaDesde()) && pase.getFechaYhora().isBefore(t.getFechaHasta())) {
+					return t.getValor();
+				}
+			}
+		return null;
+	}
+
+	public Boolean registrarTipoVehiculo(TipoVehiculo tipo) {
+		if(this.listaDeTiposVehiculos.add(tipo)) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -9,15 +9,11 @@ public class Tarifa {
 	private LocalDateTime hasta;
 	private Double valor;
 
-	public Tarifa(int id, LocalDateTime desde, LocalDateTime hasta) {
+	public Tarifa(int id, LocalDateTime desde, LocalDateTime hasta, Double valor) {
 		this.id = id;
 		this.desde = desde;
 		this.hasta = hasta;
-		this.valor = this.obtenerValor();
-	}
-
-	private Double obtenerValor() {
-		return 1000.0;
+		this.valor = valor;
 	}
 
 	public Integer getId() {
