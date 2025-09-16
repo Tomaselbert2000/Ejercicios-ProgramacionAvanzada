@@ -280,4 +280,136 @@ public class ClaseDeTest {
 		Double valorTarifaVigenteObtenido = telepase.obtenerValorTarifaVigente();
 		assertEquals(valorTarifaVigenteEsperado, valorTarifaVigenteObtenido);
 	}
+	
+	@Test
+	public void dadoQueExisteUnTelepaseYUnVehiculoObtengoQueElTotalDeSusPasadasEs3300() {
+		GestorPeaje telepase = new GestorPeaje(); // creamos el gestor
+		
+		// creamos tres tarifas diferentes y las registramos
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025, 7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		Tarifa septiembre = new Tarifa(3, LocalDateTime.of(2025, 9, 1, 0, 0), LocalDateTime.of(2025, 9, 30, 23, 59), 1200.0);
+		
+		telepase.registrarTarifa(julio);
+		telepase.registrarTarifa(agosto);
+		telepase.registrarTarifa(septiembre);
+		
+		// ahora creamos un vehiculo, su tipo y sus respectivos pases
+		TipoVehiculo tipo = new TipoVehiculo(1, "Auto");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", tipo);
+		
+		Pase pase1 = new Pase(vehiculo, LocalDateTime.of(2025, 7, 23, 12, 30));
+		Pase pase2 = new Pase(vehiculo, LocalDateTime.of(2025, 8, 11, 19, 30));
+		Pase pase3 = new Pase(vehiculo, LocalDateTime.of(2025, 9, 6, 11, 40));
+		
+		// ahora registramos los pases
+		telepase.registrarPase(pase1);
+		telepase.registrarPase(pase2);
+		telepase.registrarPase(pase3);
+		
+		Double sumaPasadasEsperada = 3300.0;
+		Double sumaPasadasObtenida = telepase.obtenerTotalPasadasPorPatente(vehiculo.getPatente());
+		
+		// y ahora comprobamos si dan iguales
+		
+		assertEquals(sumaPasadasEsperada, sumaPasadasObtenida);
+	}
+	
+	@Test
+	public void dadoQueExisteUnTelepaseYUnaTarifaObtengoElTotalDePasesConEsaTarifaAplicada() {
+		GestorPeaje telepase = new GestorPeaje(); // creamos la instancia del telepase
+		
+		// creamos tres tarifas para tres meses distintos y las registramos
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025, 7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		Tarifa septiembre = new Tarifa(3, LocalDateTime.of(2025, 9, 1, 0, 0), LocalDateTime.of(2025, 9, 30, 23, 59), 1200.0);
+		
+		telepase.registrarTarifa(julio);
+		telepase.registrarTarifa(agosto);
+		telepase.registrarTarifa(septiembre);
+		
+		// creamos un vehiculo
+		TipoVehiculo tipo = new TipoVehiculo(1, "Auto");
+		Vehiculo vehiculo1 = new Vehiculo("ABC123", "Fiat", "Cronos", tipo);
+		Vehiculo vehiculo2 = new Vehiculo("DEF456", "Volkswagen", "Gol Trend", tipo);
+		
+		// creamos una serie de pases y los registramos
+		Pase pase1 = new Pase(vehiculo1, LocalDateTime.of(2025, 7, 23, 12, 30));
+		Pase pase2 = new Pase(vehiculo2, LocalDateTime.of(2025, 7, 11, 19, 30));
+		
+		Pase pase3 = new Pase(vehiculo1, LocalDateTime.of(2025, 9, 6, 11, 40));
+		
+		Pase pase4 = new Pase(vehiculo2, LocalDateTime.of(2025, 8, 12, 13, 36));
+		Pase pase5 = new Pase(vehiculo2, LocalDateTime.of(2025, 8, 29, 11, 40));
+		
+		telepase.registrarPase(pase1);
+		telepase.registrarPase(pase2);
+		telepase.registrarPase(pase3);
+		telepase.registrarPase(pase4);
+		telepase.registrarPase(pase5);
+		
+		/*
+		 * ahora vamos a validar que la suma de todos los pases por cada tarifa aplicada da lo siguiente:
+		   2 pases en mes 7 --> 2 * 1000
+		   2 pase en mes 8 --> 1 * 2200
+		   1 pases en mes 9 --> 2 * 1200
+		 */
+		
+		Double totalJulioEsperado = 2000.0;
+		Double totalJulioObtenido = telepase.obtenerTotalPorTarifa(julio);
+		
+		Double totalAgostoEsperado = 2200.0;
+		Double totalAgostoObtenido = telepase.obtenerTotalPorTarifa(agosto);
+		
+		Double totalSeptiembreEsperado = 1200.0;
+		Double totalSeptiembreObtenido = telepase.obtenerTotalPorTarifa(septiembre);
+		
+		assertEquals(totalJulioEsperado, totalJulioObtenido);
+		assertEquals(totalAgostoEsperado, totalAgostoObtenido);
+		assertEquals(totalSeptiembreEsperado, totalSeptiembreObtenido);
+	}
+	
+	@Test
+	public void dadoQueExisteUnTelepaseYUnaListaDePasesObtengoQueElTotalRecaudadoDeTodosLosPasesEs6600() {
+		GestorPeaje telepase = new GestorPeaje(); // creamos la instancia del telepase
+		
+		// creamos tres tarifas para tres meses distintos y las registramos
+		Tarifa julio = new Tarifa(1, LocalDateTime.of(2025, 7, 1, 0, 0), LocalDateTime.of(2025, 7, 30, 23, 59), 1000.0);
+		Tarifa agosto = new Tarifa(2, LocalDateTime.of(2025, 8, 1, 0, 0), LocalDateTime.of(2025, 8, 31, 23, 59), 1100.0);
+		Tarifa septiembre = new Tarifa(3, LocalDateTime.of(2025, 9, 1, 0, 0), LocalDateTime.of(2025, 9, 30, 23, 59), 1200.0);
+		
+		telepase.registrarTarifa(julio);
+		telepase.registrarTarifa(agosto);
+		telepase.registrarTarifa(septiembre);
+		
+		// creamos un vehiculo
+		TipoVehiculo tipo = new TipoVehiculo(1, "Auto");
+		Vehiculo vehiculo = new Vehiculo("ABC123", "Fiat", "Cronos", tipo);
+		
+		// vamos a crear 2 pases para cada Tarifa
+		
+		// Julio --> se cobran 1000
+		Pase paseJulio1 = new Pase(vehiculo, LocalDateTime.of(2025, 7, 1, 12, 30));
+		Pase paseJulio2 = new Pase(vehiculo, LocalDateTime.of(2025, 7, 2, 12, 30));
+		
+		// Agosto --> se cobran 1100
+		Pase paseAgosto1 = new Pase(vehiculo, LocalDateTime.of(2025, 8, 1, 12, 30));
+		Pase paseAgosto2 = new Pase(vehiculo, LocalDateTime.of(2025, 8, 2, 12, 30));
+		
+		// Septiembre --> se cobran 1200
+		Pase paseSeptiembre1 = new Pase(vehiculo, LocalDateTime.of(2025, 9, 1, 12, 30));
+		Pase paseSeptiembre2 = new Pase(vehiculo, LocalDateTime.of(2025, 9, 2, 12, 30));
+		
+		telepase.registrarPase(paseJulio1);
+		telepase.registrarPase(paseJulio2);
+		telepase.registrarPase(paseAgosto1);
+		telepase.registrarPase(paseAgosto2);
+		telepase.registrarPase(paseSeptiembre1);
+		telepase.registrarPase(paseSeptiembre2);
+		
+		Double totalRecaudadoEsperado = 6600.0;
+		Double totalRecaudadoObtenido = telepase.obtenerTotalRecaudado();
+		
+		assertEquals(totalRecaudadoEsperado, totalRecaudadoObtenido);
+	}
 }

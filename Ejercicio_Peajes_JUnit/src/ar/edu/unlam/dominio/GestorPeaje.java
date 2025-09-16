@@ -87,4 +87,32 @@ public class GestorPeaje {
 	public Double obtenerValorTarifaVigente() {
 		return this.obtenerTarifaVigente().getValor();
 	}
+
+	public Double obtenerTotalPasadasPorPatente(String patente) {
+		Double sumaTotal = 0.0;
+		for(Pase p : this.listaPases) {
+			if(p.getVehiculo().getPatente().equals(patente)) {
+				sumaTotal += this.obtenerValorDeTarifaDePase(p);
+			}
+		}
+		return sumaTotal;
+	}
+
+	public Double obtenerTotalPorTarifa(Tarifa tarifa) {
+		Double totalPorTarifa = 0.0;
+		for(Pase p : this.listaPases) {
+			if(this.obtenerValorDeTarifaDePase(p) == tarifa.getValor()) {
+				totalPorTarifa += this.obtenerValorDeTarifaDePase(p);
+			}
+		}
+		return totalPorTarifa;
+	}
+
+	public Double obtenerTotalRecaudado() {
+		Double totalRecaudado = 0.0;
+		for(Tarifa t : this.listaDeTarifas) {
+			totalRecaudado += this.obtenerTotalPorTarifa(t);
+		}
+		return totalRecaudado;
+	}
 }
