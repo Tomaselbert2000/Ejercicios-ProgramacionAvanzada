@@ -17,4 +17,8 @@ public class GestorTransporte {
 		return false;
 	}
 
+	public Integer cantidadVehiculosRegistrados() {
+		return this.listaDeVehiculos.size();
+	}
+
 }

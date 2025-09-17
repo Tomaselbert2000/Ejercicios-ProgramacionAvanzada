@@ -12,6 +12,7 @@ public class ClaseTest {
 	private Camion camion;
 	private GestorTransporte gestor;
 	private Vehiculo colectivo;
+	private Vehiculo auto;
 	
 	@Before
 	public void inicializarVehiculo() {
@@ -19,6 +20,7 @@ public class ClaseTest {
 		vehiculo = new Vehiculo("ABC123", 16000.0, 8);
 		camion = new Camion("DEF456", 25000.0, 3);
 		colectivo = new Colectivo("XYZ789", 3000.0, 40);
+		auto = new Auto(null, null, null);
 	}
 	
 	@Test
@@ -129,5 +131,21 @@ public class ClaseTest {
 		Integer cantidadPasajerosEsperada = 40;
 		Integer cantidadPasajerosObtenida = this.colectivo.obtenerCapacidadMaximaPasajeros();
 		assertEquals(cantidadPasajerosEsperada, cantidadPasajerosObtenida);
+	}
+	
+	@Test
+	public void dadoQueExisteUnAutoSiLoRegistroObtengoTrue() {
+		Boolean seAgrego = this.gestor.agregarVehiculo(this.auto);
+		assertTrue(seAgrego);
+	}
+	
+	@Test
+	public void dadoQueExisteUnGestorDeTransporteTodosLosVehiculosSeGuardanEnLaMismaColeccion() {
+		this.gestor.agregarVehiculo(this.vehiculo);
+		this.gestor.agregarVehiculo(camion);
+		this.gestor.agregarVehiculo(colectivo);
+		Integer cantidadVehiculosEsperada = 3;
+		Integer cantidadVehiculosObtenida = this.gestor.cantidadVehiculosRegistrados();
+		assertEquals(cantidadVehiculosEsperada, cantidadVehiculosObtenida);
 	}
 }
