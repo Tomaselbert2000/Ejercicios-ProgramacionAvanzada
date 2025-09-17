@@ -10,7 +10,7 @@ public class Camion extends Vehiculo{
 	}
 
 	public Boolean cargarPeso(Double pesoACargar) {
-		if((this.pesoCargadoActual+pesoACargar) <= this.getPesoMaximo()) {
+		if((this.pesoCargadoActual+pesoACargar) <= this.obtenerPesoMaximo()) {
 			this.pesoCargadoActual += pesoACargar;
 			return true;
 		}

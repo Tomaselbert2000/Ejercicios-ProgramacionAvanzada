@@ -11,7 +11,7 @@ public class GestorTransporte {
 	}
 
 	public Boolean agregarVehiculo(Vehiculo vehiculo) {
-		if(this.listaDeVehiculos.add(vehiculo)) {
+		if(!this.existeEnLaColeccion(vehiculo) && this.listaDeVehiculos.add(vehiculo)) {
 			return true;
 		}
 		return false;
@@ -20,5 +20,13 @@ public class GestorTransporte {
 	public Integer cantidadVehiculosRegistrados() {
 		return this.listaDeVehiculos.size();
 	}
-
+	
+	public Boolean existeEnLaColeccion(Vehiculo vehiculo) {
+		for(Vehiculo v : this.listaDeVehiculos) {
+			if(v.equals(vehiculo)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -1,5 +1,7 @@
 package ar.edu.unlam.dominio;
 
+import java.util.Objects;
+
 public class Vehiculo {
 
 	private String patente;
@@ -14,11 +16,11 @@ public class Vehiculo {
 		this.cargaActual = 0;
 	}
 
-	public String getPatente() {
+	public String obtenerPatente() {
 		return this.patente;
 	}
 
-	public Double getPesoMaximo() {
+	public Double obtenerPesoMaximo() {
 		return this.pesoMaximo;
 	}
 
@@ -26,7 +28,7 @@ public class Vehiculo {
 		return this.capacidadDeCarga;
 	}
 
-	public Integer getCantidadPasajerosActual() {
+	public Integer obtenerCantidadPasajerosActual() {
 		return this.cargaActual;
 	}
 
@@ -36,5 +38,25 @@ public class Vehiculo {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(patente);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Vehiculo other = (Vehiculo) obj;
+		if(this.obtenerPatente().equals(other.obtenerPatente())) {
+			return true;
+		}
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		return Objects.equals(patente, other.patente);
 	}
 }
