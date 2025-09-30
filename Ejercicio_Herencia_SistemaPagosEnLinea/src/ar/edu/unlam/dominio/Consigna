@@ -1,0 +1,10 @@
+ Ejercicio 3: Sistema de Pago en Línea
+ Enunciado:
+ Crea un sistema para procesar pagos en línea con diferentes métodos de pago. Define una
+ clase base MetodoPago con un método procesarPago(double monto). Luego, crea
+ subclases como TarjetaCredito, MercadoPago, y TransferenciaBancaria que
+ sobrescriban el método procesarPago con la lógica específica de cada método de pago.
+ Las transferencias que superen el monto de $100000, agregan 1% como costo de
+ transacción. Para mercadopago, el recargo será del 12%, mientras que las tarjetas de
+ crédito deben validar el crédito disponible (el definido para cada TC) para luego agregar un
+ 22,7%.
