@@ -1,6 +1,6 @@
 package ar.edu.unlam.dominio;
 
-public class CuentaCorriente extends Cuenta implements Iextraible{
+public class CuentaCorriente extends Cuenta implements IprocedimientosCuenta{
 	
 	private Double limiteDescubierto;
 	
@@ -26,5 +26,4 @@ public class CuentaCorriente extends Cuenta implements Iextraible{
 	public Double getSaldo() {
 		return super.getSaldo();
 	}
-
 }

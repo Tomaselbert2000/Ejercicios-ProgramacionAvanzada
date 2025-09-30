@@ -1,6 +1,6 @@
 package ar.edu.unlam.dominio;
 
-public class CajaDeAhorro extends Cuenta implements Iextraible{
+public class CajaDeAhorro extends Cuenta implements IprocedimientosCuenta{
 
 	public CajaDeAhorro(Cliente cliente, Integer cbu) {
 		super(cliente, cbu); // con esta linea apuntamos al constructor de la superclase Cliente

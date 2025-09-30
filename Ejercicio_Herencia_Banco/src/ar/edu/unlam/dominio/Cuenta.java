@@ -1,6 +1,6 @@
 package ar.edu.unlam.dominio;
 
-public abstract class Cuenta { // dado que en ningun momento instanciamos esta clase, directamente podemos hacerla abstracta
+public abstract class Cuenta implements IprocedimientosCuenta{ // dado que en ningun momento instanciamos esta clase, directamente podemos hacerla abstracta
 	
 	// creamos una superclase Cuenta de la cual van a heredar tanto CuentaCorriente como CajaDeAhorro
 	
