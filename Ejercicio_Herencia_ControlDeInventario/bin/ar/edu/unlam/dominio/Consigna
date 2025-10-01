@@ -1,0 +1,18 @@
+ Ejercicio 4: Sistema de Control de Inventario
+ Enunciado:
+ Desarrolla un sistema de control de inventario para una tienda. Crea una clase base
+ Producto con atributos como nombre, cantidad, y precioUnitario. Implementa
+ subclases como ProductoPerecedero y ProductoNoPerecedero, cada una con
+ atributos adicionales y un método sobrescrito obtenerPrecio() que determina el precio
+ del producto:
+ ● ProductoPerecedero: 5% agregado sobre el precio unitario.
+ ● ProductoNoPerecedero: 7% agregado sobre el precio unitario.
+ La tienda debe poder informar el valor total de todos los productos que contiene, debiendo
+ obtener el precio unitario de cada producto (con el porcentaje agregado) para acumular y
+ mostrar el precio total.
+ La tienda debe poder informar el valor total de los productos perecederos que contiene,
+ debiendo obtener el precio unitario de cada producto (con el porcentaje agregado) para
+ acumular y mostrar el precio total.
+ La tienda debe poder informar el valor total de los productos no perecederos que contiene,
+ debiendo obtener el precio unitario de cada producto (con el porcentaje agregado) para
+ acumular y mostrar el precio total
