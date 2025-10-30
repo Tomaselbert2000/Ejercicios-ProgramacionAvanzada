@@ -1,0 +1,53 @@
+Gestión de máquinas virtuales
+
+Nos han solicitado desarrollar un sistema que permita gestionar las máquinas virtuales 
+contratadas por los usuarios. De ahora en más las llamaremos VM (Virtual Machine). 
+Cada Usuario posee DNI y credenciales (correo y contraseña) y puede adquirir muchas 
+VMs, no sin antes registrarse en el sistema. 
+Las VMs pueden ser destinadas para almacenar bases de datos o para almacenamiento de imágenes.
+Todas las VMs poseen una capacidad de almacenamiento. Las destinadas a almacenar 
+bases de datos, proveen de 20 GB, mientras que las destinadas a almacenar imágenes cuentan con 5GB de almacenamiento.
+También cuentan con otras características. Una VM de bases de datos tiene, además, un 
+límite de horas mensuales de uso. Por otro lado, una VM de almacenamiento de imágenes, 
+cuenta con una cantidad limitada de lecturas y escrituras. 
+Todas las VMs tienen un costo inicial (o de contratación), pero puede elevarse según uso que se les dé 
+(para alentar a adquirir nuevas VMs, si se usa más, se cobra más, siempre dentro de los límites que provee cada VM): 
+● Bases de datos: El costo inicial es de $1000, al cual se le agregan los extras por usarla, regido por la siguiente fórmula: 
+○ costo inicial + (almacenamiento ocupado) + horas de uso. 
+○ El almacenamiento ocupado tiene un valor de $10 por GB. 
+○ Las horas de uso tienen un valor de $5 por hora. 
+
+● Almacenamiento de imágenes: El costo inicial (o de contratación) es de $500, al cual se le agregan los extras por usarla, regido por la siguiente fórmula. 
+○ costo inicial + cantidad de lectura + cantidad de escrituras. 
+○ Cada lectura tiene un costo de $1. 
+○ Cada escritura tiene un costo de $2.
+
+En esta versión contaremos con 3 restricciones principales de uso. Para las VMs de bases 
+de datos, no se debe permitir superar las horas definidas. Para las VMs de almacenamiento 
+de imágenes, no es posible superar la cantidad de escrituras. 
+Cabe destacar que los usuarios registrados en el sistema deben ser únicos, debiendo 
+controlar que el correo no se repita. No pueden existir, ni se debe permitir, dos usuarios con 
+el mismo correo. Además, es necesario tener los usuarios ordenados por correo de manera ascendente. 
+Requisitos funcionales 
+El sistema debe contar con las siguientes operaciones: 
+● Registrar usuarios, considerando lo antes mencionado respecto al correo. 
+● Agregar VMs a un usuario registrado. 
+● Usar una VM según sea para bases de datos o almacenamiento de imágenes, considerando las restricciones de uso. 
+● Obtener el costo de una VM específica de un usuario según el uso. 
+● Generar un reporte que detalle los costos a pagar por cada usuario. Dichos costos, deben estar ordenados por su valor de manera descendente. 
+
+Requisitos técnicos
+● Desarrollar el sistema aplicando TDD. Las verificaciones de las pruebas deben alinearse con lo solicitado en cada prueba. 
+● Aplicar herencia y polimorfismo. Evalúe el uso de clases abstractas y/o interfaces según considere necesario. 
+● Usar colecciones adecuadas o mapas, según los lineamientos antes descritos. 
+● Aplicar las restricciones antes nombradas con excepciones. 
+Tests a desarrollar 
+1. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesCuandoAgregoUnUsuarioConUnCorreoExistenteObtengoUnaUsuarioDuplicadoException. 
+2. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConUsuariosValidosAlConsultarlosObtengoUnaColeccionDeUsuariosOrdenadosPorCorreoDescendentemente. 
+3. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioCuandoAgregoUnaVMBaseDeDatosObtengoUnResultadoExitoso. 
+4. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioCuandoAgregoUnaVMAlmacenamientoDeImagenesObtengoUnResultadoExitoso.
+5. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioYUnaVMBaseDeDatosCuandoSuperoLaCapacidadDeHorasDeUsoObtengoUnaCantidadDeHorasDeUsoExcedidaException. 
+6. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioYUnaVMAlmacenamientoDeImagenesCuandoSuperoLaCantidadDeEscriturasObtengoUnaCantidadDeEscriturasSuperadaException. 
+7. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioYUnaVMBaseDeDatosUsadaCuandoObtengoElCostoFinalPor10GBY5HorasRecibo1125.
+8. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConAlMenosUnUsuarioYUnaVMAlmacenamientoDeImagenesUsadaCuandoObtengoElCostoFinalPor20LecturasY10EscriturasRecibo540. 
+9. dadoQueExisteUnSistemaDeGestionDeMaquinasVirtualesConUsuariosQuePoseenVMsCuandoConsultoLosCostosAPagarPorCadaClienteObtengoUnMapaConClaveUsuarioYUnaColeccionDeCostosComoValorOrdenadosPorCostoDescendentemente.
