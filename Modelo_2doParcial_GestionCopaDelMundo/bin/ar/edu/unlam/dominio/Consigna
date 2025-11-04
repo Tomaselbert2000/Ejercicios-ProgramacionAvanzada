@@ -1,0 +1,51 @@
+Enunciado 
+
+Gestión de copas del mundo
+
+Se nos ha contratado para desarrollar un producto software que permita administrar el stock y las ventas de copas del mundo.
+Dichas copas del mundo pueden estar fabricadas de distintos materiales como: PLASTICO, YESO o RESINA.
+Cada copa cuenta además con un identificador y un precio.
+La fábrica de copas del mundo puede fabricar copas estándar o personalizadas.
+Para las copas estándar, deberemos contar con un stock, ya que, son las que más se fabrican y venden.
+En cambio, para las copas personalizadas, se permite elegir un atril, los cuales pueden ser de distintos colores (CAOBA, CEDRO o ROBLE_OSCURO).
+Para ambas copas del mundo (estándar o personalizada), se debe permitir obtener su precio de manera obligatoria.
+
+Para las copas del mundo estándar, al precio determinado se le agrega el 20% como costo de mano de obra.
+Para las copas del mundo personalizadas, se le agrega, al precio determinado un 15% de mano de obra y,
+según el color del atril, se deberán agregar los siguientes porcentajes:
+● CAOBA: 5%
+● CEDRO: 10%
+● ROBLE_OSCURO: 15%
+
+Cabe destacar que estos porcentajes son agregados al porcentaje de mano de obra.
+El sistema debe admitir la carga de clientes, los cuales no deben repetirse y deben estar ordenados siempre por su dni.
+Además, se solicita el nombre y el apellido por separado de estos.
+También es necesario registrar las ventas de copas del mundo realizadas a los clientes.
+Una venta está compuesta por un cliente y una colección de copas del mundo (puede comprar copas estándar como personalizadas).
+La fábrica debe contener entonces clientes, copas del mundo para vender y las ventas realizadas.
+Es posible agregar copas del mundo a la fábrica, las cuales estarán disponibles para la venta.
+También se debe permitir agregar clientes sin duplicados. En caso de querer agregar un cliente duplicado, se debe lanzar una ClienteDuplicadoException.
+Para facilitar la consulta, la fábrica debe permitir obtener las copas del mundo que sean estándar, así como también debe permitir consultar una copa del mundo por su identificador.
+Si una copa del mundo que se intenta obtener por su identificador no existe, se debe lanzar una CopaDelMundoNoEncontradaException.
+
+Para generar una venta, podemos optar por dos mecanismos.
+Ambos deben considerar la búsqueda de la venta por cliente antes de proceder a agregar las copas del mundo a la venta.
+Si no existe la venta en la colección de ventas, se deberá crear.
+● Venta de copa del mundo estándar: además de generar la venta si no existe, se debe descontar la cantidad solicitada de dicha copa del stock disponible,
+agregar a la colección de la venta la cantidad solicitada y luego agregar la venta a la colección de ventas.
+● Venta de copa del mundo personalizada: además de generar la venta si no existe, una vez agregada la copa del mundo a la venta,
+se deberá quitar de la colección de copas del mundo disponibles en la fábrica, para luego agregar la venta a la colección de ventas.
+Dado que suelen consultar sobre el valor de las copas del mundo personalizadas, se deberá proveer de algún mecanismo para obtener el precio de estas.
+Con fines estadísticos, se debe permitir obtener un resumen con total de precios de copas del mundo estándar, vendidas a clientes.
+Por cada cliente, se deberá incluir un total. Dicho resumen debe estar ordenado por cliente.
+
+Tests a desarrollar 
+1. dadoQueExisteUnaFabricaDeCopasDelMundoSePuedeAgregarUnaCopaDelMundoEstandar()
+2. dadoQueExisteUnaFabricaDeCopasDelMundoSePuedeAgregarUnaCopaDelMundoPersonalizada()
+3. dadoQueExisteUnaFabricaDeCopasDelMundoAlAgregarUnClienteExistenteSeLanzaUnaClienteDuplicadoException()
+4. dadoQueExisteUnaFabricaQuePoseeCopasDelMundoSePuedenObtenerLasCopasDelMundoEstandar()
+5. dadoQueExisteUnaFabricaDeCopasDelMundoConCopasDelMundoPuedoObtenerUnaCopaDelMundoPorSuId()
+6. dadoQueExisteUnaFabricaDeCopasDelMundoConCopasDelMundoAlAgregarCincoCopasDelMundoAUnaVentaDeCopasDelMundoEstandarParaUnClienteSeDescuentanCincoUnidadesDelStockDeCopasDelMundoEstandar()
+7. dadoQueExisteUnaFabricaDeCopasDelMundoConCopasDelMundoAlAgregarUnaVentaDeCopasDelMundoPersonalizadaParaUnClienteSeRemueveLaCopaDelMundoPersonalizadaDeLaFabrica()
+8. dadoQueExisteUnaFabricaDeCopasDelMundoConCopasDelMundoPersonalizadasSePuedeObtenerElPrecioDeUnaCopaDelMundoPersonalizada()
+9. dadoQueExisteUnaFabricaDeCopasDelMundoConVentasDeCopasDelMundoEstandarYPersonalizadasVendidasAClientesSePuedeObtenerUnMapaConClaveClienteYTotalDeVentasDeCopasEstandarOrdenadoPorCliente()
