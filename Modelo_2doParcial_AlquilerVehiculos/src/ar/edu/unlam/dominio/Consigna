@@ -1,0 +1,30 @@
+Empresa de alquileres de vehículos (Bicicletas y Motos)
+
+Se nos ha contratado para desarrollar un producto software que permita administrar los 
+alquileres de distintos vehículos que posee la empresa. Por el momento solo cuenta con 
+motos y bicicletas. Este segundo grupo puede ser bicicletas de montaña o de paseo. 
+Cada vehículo debe poseer un identificador numérico único, un nombre y algún campo para 
+saber si se encuentra disponible. 
+Las motos posee, además, una patente (“ABC123”), litros de combustible que almacena y 
+su cilindrada, mientras que las bicicletas deben poseer: un tipo de bicicleta (MONTANIA, 
+PASEO) y algún indicador que nos deje conocer si tiene frenos a disco. 
+El valor de alquiler para las motos será de $10000 por hora. Para las bicicletas, tendremos 
+un valor por hora de $5000. En caso de que la bicicleta sea de montaña, se agrega un 20% 
+al valor hora. Todos los valores totales de alquiler deben calcularse en base a la cantidad de 
+horas de alquiler deseadas por el cliente. 
+De los clientes nos interesa registrar DNI (debe ser único), nombre y apellido. 
+La empresa debe registrar alquileres, los cuales deben contar con: el cliente a quien se le 
+alquila un vehículo, el vehículo alquilado, las horas alquiladas (para ese vehículo por el 
+cliente) y el valor total del alquiler. 
+La empresa debe contar con un registro de clientes, vehículos y alquileres.
+
+Tests a desarrollar 
+1. dadoQueExisteUnaEmpresaParaAlquilarVehiculosCuandoRegistroUnClienteInexistenteObtengoUnResultadoExitoso() 
+2. dadoQueExisteUnaEmpresaParaAlquilarVehiculosCuandoRegistroUnOtroClienteConElMismoDNIObtengoUnaExcepcionDniDuplicadoException() 
+3. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosCuandoObtengoLosVehiculosBicicletaDePaseoObtengoUnaColeccionCon2Bicicletas()
+4. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosCuandoObtengoLosVehiculosMotoObtengoUnaColeccionCon3MotosOrdenadosPorPatenteAscendente() 
+5. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosCuandoConsultoLosDatosDeUnVehiculoPorSuIdObtengoElVehiculo()
+6. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosCuandoConsultoElPrecioDeAlquilerDeUnVehiculoBicicletaDeMontaniaPorOchoHorasObtengo48000() 
+7. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosYClientesCuandoAlquiloUnVehiculoMotoObtengoUnResultadoExitoso() 
+8. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosYClientesCuandoQuieroAlquilarUnVehiculoMotoYaAlquiladoObtengoUnaExcepcionVehiculoNoDisponibleException() 
+9. dadoQueExisteUnaEmpresaParaAlquilarVehiculosConVehiculosYClientesCuandoConsultoLosAlquileresDeClientesObtengoUnMapaDeClaveClienteYComoValorUnaColeccionConLosVehiculosAlquiladosPorElCliente() 
