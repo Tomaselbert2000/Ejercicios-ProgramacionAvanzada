@@ -1,0 +1,28 @@
+Sistema de Gestión para compañía de televisión
+
+Nos contrataron para desarrollar un producto software para una compañía de televisión, que 
+permita administrar suscripciones de clientes a planes. 
+De cada cliente conocemos su DNI, nombres, apellidos y edad. No es posible tener 2 clientes 
+con el mismo DNI.  
+Un plan tiene un identificador único y un nombre. Los canales tienen un número de canal, un 
+nombre, un tipo de canal (noticias, infantil, deportes, varios) y una clasificación (básico o 
+premium) 
+La compañía cuenta con un conjunto total de canales (básico y premium) los cuales no pueden 
+repetirse según su número.  
+El precio del plan básico se conforma de un valor base de $5000. Para el plan premium se 
+agrega un 20% extra. El precio de cada plan, debe ser calculado y devuelto, no fijo. 
+Los clientes pueden suscribirse solo a un plan. Cada suscripción cuenta con un identificador 
+único, el cliente en cuestión, el plan al que se suscribió y la lista de canales disponibles según el 
+plan. 
+El producto software debe permitir agregar clientes y, en caso de que ya exista un cliente con el 
+mismo DNI, deberá lanzar una excepción.
+
+Se deben resolver los siguientes tests:
+● dadoQueExisteUnaCompaniaSePuedeAgregarUnCliente() 
+● dadoQueExisteUnaCompaniaAlAgregarUnClienteExistenteSeLanzaUnaClienteExistenteException() 
+● dadoQueExisteUnaCompaniaConUnPlanBasicoYUnPlanPremiumCuandoSeObtieneElPrecioDeUnPlanPremiumDevuelve6000() 
+● dadoQueExisteUnaCompaniaConClientesSePuedenListarLosClientesOrdenadosDeManeraAscendentePorSuDni()
+● dadoQueExisteUnaCompaniaConSuscripcionesAPlanesBasicosYPremiumSePuedenListarLasSuscripcionesAPlanesPremium() 
+● dadoQueExisteUnaCompaniaConSuscripcionesAPlanesBasicosYPremiumSePuedenListarLosClientesSuscritosAPlanesBasicos() 
+● dadoQueExisteUnaCompaniaConSuscripcionesAPlanesBasicosYPremiumSePuedeMostrarElTotalDePrecioParaUnPlanBasicoOPremium() 
+● dadoQueExisteUnCompaniaConClientesSuscritosAPlanesBasicosOPremiumSePuedeObtnerUnMapaConElPlanComoClaveYUnaListaDeClientesOrdenadosDeManeraDescendentePorDniDelClienteComoValores() 
